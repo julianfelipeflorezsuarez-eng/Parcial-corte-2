@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mis solicitudes | Rutas Vivas Colombia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/rutas-vivas.css}">
+</head>
+<body>
+<div th:replace="~{fragmentos/menu :: menu}"></div>
+<main class="container py-5">
+    <h1 class="h3">Mis solicitudes</h1>
+    <p class="text-secondary">Consulta el estado y las respuestas asociadas a tus solicitudes.</p>
+    <div class="alert alert-success" th:if="${mensaje}" th:text="${mensaje}"></div>
+    <form th:action="@{/solicitudes/mis-solicitudes}" method="get" class="card card-body mb-4">
+        <div class="row g-3">
+            <div class="col-md-5"><label class="form-label" for="nombre">Nombre usado en la solicitud</label><input class="form-control" id="nombre" name="nombre" th:value="${nombre}" required></div>
+            <div class="col-md-5"><label class="form-label" for="contacto">Correo usado en la solicitud</label><input class="form-control" id="contacto" name="contacto" type="email" th:value="${contacto}" required></div>
+            <div class="col-md-2 d-flex align-items-end"><button class="btn btn-primary w-100" type="submit">Consultar</button></div>
+        </div>
+    </form>
+    <div th:if="${consultado}">
+        <div class="alert alert-info" th:if="${#lists.isEmpty(solicitudes)}">No encontramos solicitudes con ese nombre y correo.</div>
+        <article class="card mb-3" th:each="s : ${solicitudes}">
+            <div class="card-body">
+                <div class="d-flex flex-wrap justify-content-between gap-2">
+                    <h2 class="h5" th:text="${s.tipoSolicitud == 'EXPERIENCIA' ? 'Solicitud de experiencia' : 'Solicitud de ruta'}">Solicitud</h2>
+                    <span class="badge text-bg-secondary" th:text="${s.estado}">PENDIENTE</span>
+                </div>
+                <p class="mb-1" th:if="${s.tipoSolicitud == 'RUTA'}"><strong>Ruta:</strong> <span th:each="r : ${rutas}" th:if="${r.id == s.rutaId}" th:text="${r.nombre}"></span></p>
+                <p class="mb-1" th:if="${s.tipoSolicitud == 'EXPERIENCIA'}"><strong>Experiencia:</strong> <span th:each="e : ${experiencias}" th:if="${e.id == s.experienciaId}" th:text="${e.nombre}"></span></p>
+                <p class="mb-1"><strong>Fecha solicitada:</strong> <span th:text="${s.fechaDeseada}"></span></p>
+                <p class="mb-1"><strong>Participantes:</strong> <span th:text="${s.participantes}"></span></p>
+                <p class="mb-1"><strong>Tu mensaje:</strong> <span th:text="${s.mensaje != null and !#strings.isEmpty(s.mensaje) ? s.mensaje : 'Sin mensaje adicional'}"></span></p>
+                <hr>
+                <h3 class="h6">Respuesta del responsable</h3>
+                <p th:if="${s.respuestaGuia != null and !#strings.isEmpty(s.respuestaGuia)}" th:text="${s.respuestaGuia}"></p>
+                <p class="text-secondary mb-0" th:if="${s.respuestaGuia == null or #strings.isEmpty(s.respuestaGuia)}">Todavía no hay una respuesta. Puedes volver a consultar más adelante.</p>
+                <small class="text-secondary" th:if="${s.fechaRespuesta != null}" th:text="|Respondida el ${s.fechaRespuesta}|"></small>
+            </div>
+        </article>
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

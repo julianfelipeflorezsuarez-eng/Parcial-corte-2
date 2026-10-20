@@ -1,0 +1,29 @@
+<nav th:fragment="menu" class="navbar navbar-expand-xl navbar-dark navbar-rutas">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/}"><span class="marca-icono">RV</span> Rutas Vivas <span class="marca-pais">Colombia</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Mostrar navegación">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menuPrincipal">
+            <ul class="navbar-nav me-auto mb-2 mb-xl-0">
+                <li class="nav-item"><a class="nav-link" th:href="@{/}">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/atractivos}">Atractivos</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/rutas}">Rutas</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/experiencias}">Experiencias</a></li>
+                <li class="nav-item" th:if="${session.usuarioRol == 'TURISTA'}"><a class="nav-link" th:href="@{/solicitudes/mis-solicitudes}">Mis solicitudes</a></li>
+                <li class="nav-item" th:if="${session.admin}"><a class="nav-link" th:href="@{/solicitudes}">Solicitudes</a></li>
+                <li class="nav-item" th:if="${session.admin}"><a class="nav-link" th:href="@{/admin/usuarios}">Usuarios</a></li>
+                <li class="nav-item" th:if="${session.admin}"><a class="nav-link" th:href="@{/admin/observaciones}">Observaciones</a></li>
+                <li class="nav-item" th:if="${session.usuarioRol == 'GUIA'}"><a class="nav-link" th:href="@{/guia}">Mi panel</a></li>
+                <li class="nav-item" th:if="${session.usuarioRol == 'GESTOR_CULTURAL'}"><a class="nav-link" th:href="@{/gestor-cultural}">Mi panel</a></li>
+                <li class="nav-item" th:if="${session.usuarioRol == 'AUDITOR'}"><a class="nav-link" th:href="@{/auditor}">Mi panel</a></li>
+            </ul>
+            <div class="d-flex flex-wrap align-items-center gap-2 py-2 py-xl-0">
+                <span class="usuario-sesion" th:if="${session.usuarioNombre != null}" th:text="${session.usuarioNombre}"></span>
+                <a class="btn btn-nav-secundario btn-sm" th:if="${session.usuarioNombre == null}" th:href="@{/login}">Iniciar sesión</a>
+                <a class="btn btn-nav-claro btn-sm" th:if="${session.usuarioNombre == null}" th:href="@{/registro}">Crear cuenta</a>
+                <form th:if="${session.usuarioNombre != null}" th:action="@{/logout}" method="post" class="m-0"><button class="btn btn-nav-secundario btn-sm" type="submit">Cerrar sesión</button></form>
+            </div>
+        </div>
+    </div>
+</nav>
