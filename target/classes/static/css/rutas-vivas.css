@@ -1,0 +1,471 @@
+:root {
+    --verde: #285b46;
+    --verde-oscuro: #193d30;
+    --verde-claro: #e8efe9;
+    --tierra: #8d765d;
+    --fondo: #f7f7f3;
+    --texto: #26352d;
+    --texto-secundario: #69746d;
+    --borde: #dfe5df;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+
+a {
+    color: var(--verde);
+}
+
+.navbar-rutas {
+    background: var(--verde-oscuro);
+    padding: 16px 0;
+}
+
+.navbar-rutas .navbar-brand {
+    font-weight: 700;
+    letter-spacing: .2px;
+}
+
+.navbar-rutas .nav-link {
+    color: #edf3ee;
+}
+
+.navbar-rutas .nav-link:hover {
+    color: #fff;
+}
+
+.hero {
+    min-height: 440px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    background:
+        linear-gradient(90deg, rgba(20, 55, 41, .96), rgba(32, 76, 55, .76)),
+        linear-gradient(135deg, #527b5f, #203f31);
+}
+
+.hero-contenido {
+    padding-top: 72px;
+    padding-bottom: 72px;
+}
+
+.hero h1 {
+    max-width: 720px;
+    margin-bottom: 18px;
+    font-size: clamp(2.4rem, 5vw, 4.4rem);
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.hero-texto {
+    max-width: 620px;
+    margin-bottom: 28px;
+    font-size: 1.12rem;
+    color: #edf2ed;
+}
+
+.hero-etiqueta,
+.sobrelinea {
+    margin-bottom: 8px;
+    color: var(--tierra);
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.hero-etiqueta {
+    color: #dce8dd;
+}
+
+.btn-verde {
+    border-color: var(--verde);
+    background: var(--verde);
+    color: #fff;
+}
+
+.btn-verde:hover,
+.btn-verde:focus {
+    border-color: var(--verde-oscuro);
+    background: var(--verde-oscuro);
+    color: #fff;
+}
+
+.buscador-seccion {
+    padding: 26px 0;
+    background: #fff;
+    border-bottom: 1px solid var(--borde);
+}
+
+.buscador-form,
+.filtros-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 16px;
+    align-items: end;
+}
+
+.buscador-boton {
+    min-width: 170px;
+}
+
+.contenido-principal {
+    padding-top: 48px;
+}
+
+.seccion {
+    margin-bottom: 64px;
+}
+
+.titulo-seccion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.titulo-seccion h1,
+.titulo-seccion h2 {
+    margin: 0;
+    font-size: clamp(1.7rem, 3vw, 2.25rem);
+    font-weight: 700;
+}
+
+.tarjeta {
+    height: 100%;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--borde);
+    border-radius: 5px;
+}
+
+.tarjeta-imagen {
+    position: relative;
+    height: 210px;
+    overflow: hidden;
+    background: #dce6dc;
+}
+
+.tarjeta-imagen img,
+.detalle-imagen img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.imagen-respaldo {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: #dce6dc;
+    color: var(--verde-oscuro);
+    text-align: center;
+    font-weight: 700;
+}
+
+.imagen-ruta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #dce6dc;
+    color: var(--verde-oscuro);
+    font-weight: 700;
+}
+
+.tarjeta-contenido {
+    padding: 22px;
+}
+
+.tarjeta-contenido h2,
+.tarjeta-contenido h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.tarjeta-contenido p {
+    color: var(--texto-secundario);
+}
+
+.tarjeta-contenido .btn {
+    margin-top: 6px;
+}
+
+.tarjeta-experiencia {
+    border-top: 3px solid var(--tierra);
+}
+
+.texto-secundario {
+    color: var(--texto-secundario);
+    font-size: .92rem;
+}
+
+.estado-vacio {
+    padding: 42px 24px;
+    background: #fff;
+    border: 1px solid var(--borde);
+    text-align: center;
+}
+
+.estado-vacio h2 {
+    font-size: 1.4rem;
+}
+
+.zona-formulario,
+.zona-login {
+    max-width: 900px;
+    padding-top: 44px;
+    padding-bottom: 44px;
+}
+
+.zona-login {
+    max-width: 560px;
+    min-height: 65vh;
+    display: flex;
+    align-items: center;
+}
+
+.formulario-panel,
+.detalle-panel {
+    padding: clamp(22px, 4vw, 38px);
+    background: #fff;
+    border: 1px solid var(--borde);
+    border-radius: 5px;
+}
+
+.formulario-panel h1,
+.detalle-panel h1 {
+    margin-bottom: 24px;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.login-panel {
+    width: 100%;
+}
+
+.detalle-imagen {
+    position: relative;
+    height: 320px;
+    margin-bottom: 28px;
+    overflow: hidden;
+    background: #dce6dc;
+}
+
+.detalle-contenido {
+    padding: 28px 0;
+}
+
+.lista-paradas li {
+    margin-bottom: 12px;
+}
+
+.tabla-rutas {
+    background: #fff;
+}
+
+.tabla-rutas thead th {
+    background: var(--verde-claro);
+    color: var(--verde-oscuro);
+}
+
+.pie-pagina {
+    background: var(--verde-oscuro);
+    color: #edf3ee;
+}
+
+.pie-pagina p:first-child {
+    font-weight: 700;
+}
+
+.enlace-secundario {
+    color: var(--verde);
+}
+
+@media (max-width: 767px) {
+    .hero {
+        min-height: 390px;
+    }
+
+    .buscador-form,
+    .filtros-form {
+        grid-template-columns: 1fr;
+    }
+
+    .buscador-boton {
+        min-width: 0;
+    }
+
+    .titulo-seccion {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .tarjeta-imagen {
+        height: 190px;
+    }
+
+    .detalle-imagen {
+        height: 220px;
+    }
+}
+
+
+/* Imágenes de los atractivos turísticos */
+.atractivo-imagen {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    background-color: #e9ecef;
+}
+
+.detalle-imagen {
+    width: 100%;
+    max-height: 500px;
+    min-height: 280px;
+    object-fit: cover;
+    background-color: #e9ecef;
+}
+
+.atractivo-sin-imagen {
+    min-height: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e9ecef;
+    color: #5f6368;
+    text-align: center;
+    padding: 20px;
+}
+
+.texto-descripcion {
+    white-space: pre-line;
+    line-height: 1.7;
+}
+
+/* Formularios */
+form .form-control,
+form .form-select {
+    border-radius: 4px;
+}
+
+form .form-control:focus,
+form .form-select:focus {
+    border-color: #557b61;
+    box-shadow: 0 0 0 0.15rem rgba(85, 123, 97, 0.18);
+}
+
+/* Tarjetas de experiencias y rutas */
+.card {
+    border: 1px solid #e2e6e3;
+    border-radius: 6px;
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+.card-title,
+.card h2 {
+    color: #263a2e;
+}
+
+/* Tablas de administración */
+.table thead th {
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+/* Texto largo */
+.texto-descripcion {
+    overflow-wrap: anywhere;
+    line-height: 1.7;
+}
+
+/* Navegación en pantallas pequeñas */
+@media (max-width: 576px) {
+    main.container {
+        padding-top: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
+    }
+
+    .table {
+        font-size: 0.875rem;
+    }
+}
+
+.portada-hero {
+    background: linear-gradient(115deg, #244b37, #46684e);
+    color: #ffffff;
+}
+
+.portada-hero h1 {
+    max-width: 760px;
+    line-height: 1.12;
+}
+
+.portada-hero p {
+    max-width: 650px;
+}
+
+.portada-hero .btn {
+    border-radius: 4px;
+}
+
+.portada-hero .btn-light {
+    color: #244b37;
+}
+
+.portada-hero .btn-outline-light:hover {
+    color: #244b37;
+}
+
+/* Identidad visual renovada: naturaleza, calidez y una sola navegación compartida */
+:root { --verde: #286044; --verde-oscuro: #173d2c; --verde-claro: #e8f0e8; --tierra: #c58a55; --fondo: #f8f7f2; --texto: #25352b; }
+.navbar-rutas { background: rgba(20, 54, 39, .98); padding: 13px 0; box-shadow: 0 5px 22px rgba(17, 40, 28, .12); }
+.navbar-rutas .navbar-brand { display:flex; align-items:center; gap:8px; color:#fff; font-size:1.08rem; }
+.marca-icono { display:inline-grid; place-items:center; width:35px; height:35px; background:#d6a56d; color:#173d2c; font-size:.78rem; letter-spacing:.03em; }
+.marca-pais { color:#d9b68c; }
+.navbar-rutas .nav-link { padding:.65rem .75rem !important; color:rgba(255,255,255,.82); font-size:.93rem; }
+.navbar-rutas .nav-link:hover, .navbar-rutas .nav-link:focus { color:#f1c995; }
+.usuario-sesion { color:#f6eadb; font-size:.9rem; padding:0 .4rem; }
+.btn-nav-secundario { border:1px solid rgba(255,255,255,.65); color:#fff; }
+.btn-nav-secundario:hover { background:#fff; color:var(--verde-oscuro); }
+.btn-nav-claro { background:#e2b77f; color:#173d2c; border:1px solid #e2b77f; }
+.btn-nav-claro:hover { background:#f0d0a5; color:#173d2c; }
+.portada-hero { position:relative; isolation:isolate; min-height:540px; display:flex; align-items:center; overflow:hidden; background-image:linear-gradient(90deg,rgba(15,42,30,.88) 0%,rgba(21,54,38,.69) 48%,rgba(22,48,34,.22) 100%),url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=2000&q=85'); background-size:cover; background-position:center 48%; }
+.portada-hero .container { position:relative; z-index:1; padding-top:4.5rem !important; padding-bottom:4.5rem !important; }
+.portada-hero .text-uppercase { color:#f0c895; letter-spacing:.18em; }
+.portada-hero h1 { max-width:800px; font-family:Georgia,'Times New Roman',serif; font-size:clamp(2.8rem,6vw,5.3rem); font-weight:500 !important; letter-spacing:-.035em; }
+.portada-hero .lead { color:#f4f3eb; font-size:1.13rem; line-height:1.8; }
+.portada-hero .btn-light { background:#e4b77d; border-color:#e4b77d; color:#173d2c; }
+.portada-hero .btn-light:hover { background:#f1d0a3; }
+.portada-hero .btn-outline-light { border-color:rgba(255,255,255,.8); }
+main.container { max-width:1180px; }
+main .card { box-shadow:0 8px 26px rgba(34,54,41,.055); transition:transform .2s ease, box-shadow .2s ease; }
+main .card:hover { transform:translateY(-3px); box-shadow:0 14px 32px rgba(34,54,41,.1); }
+.panel-cabecera { padding:1.6rem 1.8rem; margin-bottom:1.7rem; background:linear-gradient(120deg,#edf2e9,#f8f1e7); border-left:4px solid #bd8a58; }
+.panel-cabecera .sobrelinea { color:#987044; }
+.estado-etiqueta { display:inline-block; padding:.28rem .55rem; background:#edf2e9; color:#285b46; font-size:.8rem; font-weight:700; }
+.table-responsive { border:1px solid #e2e7df; background:white; }
+.table { margin-bottom:0; }
+@media(max-width:767px) { .portada-hero { min-height:470px; background-position:58% center; } .portada-hero .container { padding-top:3rem !important; padding-bottom:3rem !important; } .navbar-rutas .navbar-brand { font-size:1rem; } }

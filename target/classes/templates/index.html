@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rutas Vivas Colombia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/rutas-vivas.css}">
+</head>
+<body>
+<div th:replace="~{fragmentos/menu :: menu}"></div>
+
+<header class="portada-hero">
+    <div class="container py-5">
+        <div class="row align-items-center py-lg-5">
+            <div class="col-lg-8">
+                <p class="text-uppercase small fw-semibold">Turismo y cultura colombiana</p>
+                <h1 class="display-4 fw-bold">Descubre Colombia a tu manera</h1>
+                <p class="lead mt-3">
+                    Explora destinos, conoce rutas y encuentra experiencias
+                    culturales que conectan con la diversidad del país.
+                </p>
+                <div class="d-flex flex-wrap gap-2 mt-4">
+                    <a class="btn btn-light btn-lg" th:href="@{/atractivos}">
+                        Explorar atractivos
+                    </a>
+                    <a class="btn btn-outline-light btn-lg" th:href="@{/rutas}">
+                        Conocer rutas
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="container py-5">
+    <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-end gap-3 mb-3">
+            <div>
+                <h2 class="h3">Lugares para descubrir</h2>
+                <p class="text-secondary mb-0">Destinos destacados de Colombia.</p>
+            </div>
+            <a th:href="@{/atractivos}">Ver todos</a>
+        </div>
+
+        <div class="row g-4" th:if="${!#lists.isEmpty(atractivos)}">
+            <div class="col-md-6 col-lg-4" th:each="atractivo : ${atractivos}">
+                <article class="card h-100">
+                    <img class="card-img-top atractivo-imagen"
+                         th:if="${atractivo.imagenUrl != null and !#strings.isEmpty(atractivo.imagenUrl)}"
+                         th:src="${atractivo.imagenUrl}" th:alt="${atractivo.nombre}">
+                    <div class="atractivo-sin-imagen"
+                         th:if="${atractivo.imagenUrl == null or #strings.isEmpty(atractivo.imagenUrl)}">
+                        <span th:text="${atractivo.categoria != null ? atractivo.categoria : 'Destino turístico'}"></span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="h5" th:text="${atractivo.nombre}"></h3>
+                        <p class="text-secondary small">
+                            <span th:text="${atractivo.municipio}"></span>,
+                            <span th:text="${atractivo.departamento}"></span>
+                        </p>
+                        <p th:text="${#strings.abbreviate(atractivo.descripcion != null ? atractivo.descripcion : '', 120)}"></p>
+                        <a class="btn btn-outline-primary"
+                           th:href="@{/atractivos/{id}(id=${atractivo.id})}">
+                            Conocer lugar
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <div class="alert alert-info" th:if="${#lists.isEmpty(atractivos)}">
+            Aún no hay atractivos publicados.
+        </div>
+    </section>
+
+    <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-end gap-3 mb-3">
+            <div>
+                <h2 class="h3">Rutas turísticas</h2>
+                <p class="text-secondary mb-0">Recorridos para organizar tu próxima visita.</p>
+            </div>
+            <a th:href="@{/rutas}">Ver todas</a>
+        </div>
+
+        <div class="row g-3" th:if="${!#lists.isEmpty(rutas)}">
+            <div class="col-md-4" th:each="ruta : ${rutas}">
+                <article class="card h-100">
+                    <div class="card-body">
+                        <h3 class="h5" th:text="${ruta.nombre}"></h3>
+                        <p class="text-secondary" th:text="${ruta.destino}"></p>
+                        <p th:text="${#strings.abbreviate(ruta.descripcion != null ? ruta.descripcion : '', 120)}"></p>
+                        <a th:href="@{/rutas/{id}(id=${ruta.id})}"
+                           class="btn btn-outline-primary">Ver ruta</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="alert alert-info" th:if="${#lists.isEmpty(rutas)}">
+            Aún no hay rutas registradas.
+        </div>
+    </section>
+
+    <section>
+        <div class="d-flex justify-content-between align-items-end gap-3 mb-3">
+            <div>
+                <h2 class="h3">Experiencias culturales</h2>
+                <p class="text-secondary mb-0">Tradiciones, gastronomía y actividades locales.</p>
+            </div>
+            <a th:href="@{/experiencias}">Ver todas</a>
+        </div>
+
+        <div class="row g-3" th:if="${!#lists.isEmpty(experiencias)}">
+            <div class="col-md-4" th:each="experiencia : ${experiencias}">
+                <article class="card h-100">
+                    <div class="card-body">
+                        <h3 class="h5" th:text="${experiencia.nombre}"></h3>
+                        <p class="text-secondary" th:text="${experiencia.ubicacion}"></p>
+                        <p th:text="${#strings.abbreviate(experiencia.descripcion != null ? experiencia.descripcion : '', 120)}"></p>
+                        <a th:href="@{/experiencias/{id}(id=${experiencia.id})}"
+                           class="btn btn-outline-primary">Ver experiencia</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="alert alert-info" th:if="${#lists.isEmpty(experiencias)}">
+            Aún no hay experiencias registradas.
+        </div>
+    </section>
+</main>
+
+<footer class="bg-dark text-white py-4">
+    <div class="container">
+        <p class="mb-0">Rutas Vivas Colombia · Turismo, cultura y territorio.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/rutas-vivas.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

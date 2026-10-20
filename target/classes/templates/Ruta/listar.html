@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rutas turísticas | Rutas Vivas Colombia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/rutas-vivas.css}">
+</head>
+<body>
+<div th:replace="~{fragmentos/menu :: menu}"></div>
+
+<main class="container py-5">
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+        <div>
+            <h1>Rutas turísticas</h1>
+            <p class="text-secondary mb-0">Explora recorridos por diferentes regiones de Colombia.</p>
+        </div>
+        <a th:if="${admin}" class="btn btn-primary" th:href="@{/rutas/nuevo}">
+            Crear ruta
+        </a>
+    </div>
+
+    <div class="alert alert-success" th:if="${mensaje}" th:text="${mensaje}"></div>
+    <div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
+
+    <div class="table-responsive" th:if="${!#lists.isEmpty(rutas)}">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+            <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Destino</th>
+                <th>Duración</th>
+                <th>Guía</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="ruta : ${rutas}">
+                <td>
+                    <img th:if="${imagenesRutas[ruta.id] != null}" th:src="${imagenesRutas[ruta.id]}" th:alt="${ruta.nombre}" style="width:110px;height:72px;object-fit:cover" class="rounded">
+                    <span class="text-secondary small" th:if="${imagenesRutas[ruta.id] == null}">Sin imagen</span>
+                </td>
+                <td th:text="${ruta.nombre}"></td>
+                <td th:text="${ruta.destino}"></td>
+                <td th:text="${ruta.duracion}"></td>
+                <td th:text="${ruta.guia}"></td>
+                <td class="text-nowrap">
+                    <a class="btn btn-sm btn-outline-primary"
+                       th:href="@{/rutas/{id}(id=${ruta.id})}">Ver</a>
+                    <a class="btn btn-sm btn-outline-secondary" th:if="${admin}"
+                       th:href="@{/rutas/{id}/editar(id=${ruta.id})}">Editar</a>
+                    <form class="d-inline" th:if="${admin}"
+                          th:action="@{/rutas/{id}/eliminar(id=${ruta.id})}"
+                          method="post"
+                          onsubmit="return confirm('¿Eliminar esta ruta?');">
+                        <button class="btn btn-sm btn-outline-danger" type="submit">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="alert alert-info" th:if="${#lists.isEmpty(rutas)}">
+        Todavía no hay rutas registradas.
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
